@@ -10,7 +10,7 @@ Place `hercules-theme.el` in a directory in your load path and `require` it. By 
 (add-to-list 'load-path "~/.emacs.d/themes/")
 (require 'hercules-theme)
 ```
-Use `hercules-select-theme' to choose between dark and light variants. `hercules-toggle-theme' toggles between them.
+Use `hercules-select-theme` to choose between dark and light variants. `hercules-toggle-theme` toggles between them.
 ```elisp
 (hercules-select-theme 'dark)
 (hercules-select-theme 'light)
