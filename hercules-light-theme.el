@@ -1,4 +1,4 @@
-;;; hercules-theme.el --- A minimalist dark theme with amber accents -*- lexical-binding: t -*-
+;;; hercules-light-theme.el --- A minimalist light theme with amber accents -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2025 Tamas Zsar
 
@@ -25,63 +25,67 @@
 
 ;;; Commentary:
 
-;; Hercules is a minimalist dark theme with warm amber/orange accents,
+;; Hercules Light is a minimalist light theme with warm amber/orange accents,
 ;; inspired by the old Hercules monitors.  The basis for this theme is
 ;; gruber-darker.
 ;;
 ;; Installation:
 ;;
-;;   M-x package-install-file RET hercules-theme.el
-;;   M-x load-theme RET hercules
+;;   M-x package-install-file RET hercules-light-theme.el
+;;   M-x load-theme RET hercules-light
 ;;
 ;; Or add to your init file:
 ;;
-;;   (load-theme 'hercules t)
+;;   (load-theme 'hercules-light t)
 
 ;;; Code:
 
-(deftheme hercules
-  "A minimalist dark theme with warm amber/orange accents.")
+(deftheme hercules-light
+  "A minimalist light theme with warm amber/orange accents.")
 
 (let ((class '((class color) (min-colors 89)))
-      ;; Dark theme colors
-      (bg          "#282828")
-      (bg-1        "#181818")
-      (bg+1        "#453d41")
-      (bg+2        "#484848")
-      (bg+3        "#52494e")
+      ;; Light theme colors
+      (bg          "#fbfbf8")
+      (bg-1        "#ffffff")
+      (bg+1        "#e8e8e5")
+      (bg+2        "#e0e0dc")
+      (bg+3        "#d0d0cc")
       
-      (fg-1        "#b8a19f")
-      (fg          "#e4e4ef")
-      (fg+1        "#f4f4ff")
+      (fg-1        "#6a6a6a")
+      (fg          "#3a3a3a")
+      (fg+1        "#2a2a2a")
       
       ;; Amber/orange colors
-      (rust        "#cc7833")
-      (orange      "#ff9f40")
-      (amber       "#ffa726")
-      (peach       "#ffb366")
+      (rust        "#aa6500")
+      (orange      "#e67e00")
+      (amber       "#d47100")
+      (peach       "#c77430")
       
       ;; Other colors
-      (red         "#f43841")
-      (green       "#73c936")
-      (magenta     "#cc8cc3")
-      (quartz      "#b8a5a0")
-      (niagara     "#7f6a5f"))
+      (red         "#cc1f1f")
+      (green       "#448c27")
+      (magenta     "#aa6ebb")
+      (quartz      "#7a6a60")
+      (niagara     "#5f4a3f")
+      
+      ;; Light-specific
+      (highlight   "#f9f0e8")
+      (selection   "#ffe8cc"))
   
   (custom-theme-set-faces
-   'hercules
+   'hercules-light
    
    ;; Basic faces
    `(default ((,class (:foreground ,fg :background ,bg))))
    `(cursor ((,class (:foreground ,bg :background ,fg))))
    `(fringe ((,class (:foreground ,fg-1 :background ,bg))))
-   `(highlight ((,class (:background ,bg+1))))
-   `(region ((,class (:background ,bg+2))))
+   `(highlight ((,class (:background ,highlight))))
+   `(region ((,class (:background ,selection))))
    `(secondary-selection ((,class (:background ,bg+1))))
-   `(isearch ((,class (:foreground ,bg :background ,amber))))
-   `(lazy-highlight ((,class (:foreground ,bg :background ,orange))))
+   `(isearch ((,class (:foreground ,fg+1 :background ,amber))))
+   `(lazy-highlight ((,class (:foreground ,fg+1 :background ,selection))))
    `(minibuffer-prompt ((,class (:foreground ,amber :weight bold))))
-   `(hl-line ((,class (:background ,bg-1))))
+   `(hl-line ((,class (:background ,bg+1))))
    
    ;; Font lock faces
    `(font-lock-builtin-face ((,class (:foreground ,orange))))
@@ -97,16 +101,16 @@
    `(font-lock-warning-face ((,class (:foreground ,red :weight bold))))
    
    ;; Mode line
-   `(mode-line ((,class (:foreground ,fg+1 :background ,bg+1))))
-   `(mode-line-inactive ((,class (:foreground ,fg-1 :background ,bg+1))))
+   `(mode-line ((,class (:foreground ,fg+1 :background ,bg+1 :box (:line-width 1 :color ,bg+2)))))
+   `(mode-line-inactive ((,class (:foreground ,fg-1 :background ,bg+1 :box (:line-width 1 :color ,bg+2)))))
    `(mode-line-buffer-id ((,class (:foreground ,amber :weight bold))))
    
    ;; Search
    `(isearch-fail ((,class (:foreground ,red :background ,bg))))
-   `(match ((,class (:background ,orange))))
+   `(match ((,class (:background ,selection))))
    
    ;; Parens
-   `(show-paren-match ((,class (:foreground ,bg :background ,peach))))
+   `(show-paren-match ((,class (:foreground ,bg :background ,amber))))
    `(show-paren-mismatch ((,class (:foreground ,bg :background ,red))))
    
    ;; Links
@@ -139,56 +143,14 @@
    `(window-divider-last-pixel ((,class (:foreground ,bg+2))))))
 
 (custom-theme-set-variables
- 'hercules
- '(frame-background-mode 'dark))
+ 'hercules-light
+ '(frame-background-mode 'light))
 
 ;;;###autoload
 (when load-file-name
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
-(provide-theme 'hercules)
+(provide-theme 'hercules-light)
 
-;;; Utility functions for theme switching
-
-(defgroup hercules nil
-  "Hercules theme options."
-  :group 'faces)
-
-(defcustom hercules-current-variant 'dark
-  "Current Hercules theme variant."
-  :type '(choice (const :tag "Dark" dark)
-                 (const :tag "Light" light))
-  :group 'hercules)
-
-;;;###autoload
-(defun hercules-select-theme (&optional variant)
-  "Select Hercules theme VARIANT (dark or light).
-If VARIANT is not provided, prompt for selection.
-Note: You need to have hercules-light-theme.el installed for the light variant."
-  (interactive)
-  (let ((choice (or variant
-                    (intern (completing-read "Hercules variant: " 
-                                             '("dark" "light") 
-                                             nil t)))))
-    (setq hercules-current-variant choice)
-    (condition-case err
-        (progn
-          (load-theme (if (eq choice 'dark) 'hercules 'hercules-light) t)
-          (message "Hercules %s theme applied" choice))
-      (error 
-       (if (eq choice 'light)
-           (message "Hercules light theme not found. Please install hercules-light-theme.el")
-         (message "Error loading theme: %s" err))))))
-
-;;;###autoload
-(defun hercules-toggle-theme ()
-  "Toggle between dark and light Hercules variants.
-Note: You need to have hercules-light-theme.el installed for the light variant."
-  (interactive)
-  (let ((new-variant (if (eq hercules-current-variant 'dark) 'light 'dark)))
-    (hercules-select-theme new-variant)))
-
-(provide 'hercules-theme)
-
-;;; hercules-theme.el ends here
+;;; hercules-light-theme.el ends here
