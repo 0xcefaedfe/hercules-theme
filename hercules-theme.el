@@ -140,10 +140,6 @@ If VARIANT is not provided, prompt for selection."
   (let ((new-variant (if (eq hercules-current-variant 'dark) 'light 'dark)))
     (hercules-select-theme new-variant)))
 
-;; Apply default theme on load
-(hercules-apply-theme hercules-current-variant)
-
 (provide 'hercules-theme)
 
 ;;; hercules-theme.el ends here
-
