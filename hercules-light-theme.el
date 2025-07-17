@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2025 Tamas Zsar
 
-;; Author: Tamas Zsar <your-email@example.com>
+;; Author: Tamas Zsar <t@nxtsqr.com>
 ;; URL: https://github.com/0xcefaedfe/hercules-theme
 ;; Version: 1.0.0
 ;; Package-Requires: ((emacs "24.3"))
