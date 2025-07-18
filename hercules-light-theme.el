@@ -46,7 +46,6 @@
 (let ((class '((class color) (min-colors 89)))
       ;; Light theme colors
       (bg          "#fbfbf8")
-      (bg-1        "#ffffff")
       (bg+1        "#e8e8e5")
       (bg+2        "#e0e0dc")
       (bg+3        "#d0d0cc")
@@ -64,7 +63,6 @@
       ;; Other colors
       (red         "#cc1f1f")
       (green       "#448c27")
-      (magenta     "#aa6ebb")
       (quartz      "#7a6a60")
       (niagara     "#5f4a3f")
       

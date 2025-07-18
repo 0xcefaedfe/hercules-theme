@@ -64,7 +64,6 @@
       ;; Other colors
       (red         "#f43841")
       (green       "#73c936")
-      (magenta     "#cc8cc3")
       (quartz      "#b8a5a0")
       (niagara     "#7f6a5f"))
   
@@ -168,15 +167,15 @@ If VARIANT is not provided, prompt for selection.
 Note: You need to have hercules-light-theme.el installed for the light variant."
   (interactive)
   (let ((choice (or variant
-                    (intern (completing-read "Hercules variant: " 
-                                             '("dark" "light") 
+                    (intern (completing-read "Hercules variant: "
+                                             '("dark" "light")
                                              nil t)))))
     (setq hercules-current-variant choice)
     (condition-case err
         (progn
           (load-theme (if (eq choice 'dark) 'hercules 'hercules-light) t)
           (message "Hercules %s theme applied" choice))
-      (error 
+      (error
        (if (eq choice 'light)
            (message "Hercules light theme not found. Please install hercules-light-theme.el")
          (message "Error loading theme: %s" err))))))
