@@ -189,6 +189,6 @@ Note: You need to have hercules-light-theme.el installed for the light variant."
   (let ((new-variant (if (eq hercules-current-variant 'dark) 'light 'dark)))
     (hercules-select-theme new-variant)))
 
-(provide 'hercules-theme)
+(provide-theme 'hercules)
 
 ;;; hercules-theme.el ends here
